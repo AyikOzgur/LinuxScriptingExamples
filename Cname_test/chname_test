@@ -1,0 +1,124 @@
+#colors for printing messages
+red=`tput setaf 1`
+yell=`tput setaf 3`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+path=`pwd`
+
+#Creating Files in Main Directory
+touch "${path}/File1"
+touch "${path}/File2"
+
+#Creating Directories and file and subdirectories
+mkdir "${path}/Dir1"
+touch "${path}/Dir1/File1"
+touch "${path}/Dir1/File2"
+mkdir "${path}/Dir1/SubDir1"
+touch "${path}/Dir1/SubDir1/File1"
+touch "${path}/Dir1/SubDir1/File2"
+mkdir "${path}/Dir1/SubDir2"
+touch "${path}/Dir1/SubDir2/File1"
+touch "${path}/Dir1/SubDir2/File2"
+
+read -p "${reset}All files and directories are created properly Press [Enter] Key to Start the Testing Section ..."
+
+#Lowercasing Test
+read -p "${reset}Press [Enter] key to test lower casing, testing command : ./chname.sh -l File1 File2 "
+echo "${green}"
+./chname.sh -l File1 File2
+
+#Uppercasing Test
+read -p "${reset}Press [Enter] key to test upper casing, testing command : ./chname.sh -u file1 file2"
+echo "${green}"
+./chname.sh -u file1 file2
+
+#Testing Recursive with -l
+read -p "${reset}Press [Enter] key to test lower casing with recursive, testing command : ./chname.sh -r -l Dir1 FILE1 FILE2"
+echo "${green}"
+./chname.sh -r -l Dir1 FILE1 FILE2
+
+#Testing Recursive with -u
+read -p "${reset}Press [Enter] key to test uper casing with -r, testing command : ./chname.sh -u -r file1 file2 Dir1"
+echo "${green}"
+./chname.sh -u -r file1 file2 Dir1  
+
+#Testing Recursive and Subdirectories with -l 
+read -p "${reset}Press [Enter] key to lower casing with -r -s, testing command : ./chname.sh -s -r -l FILE1 FILE2 Dir1"
+echo "${green}"
+./chname.sh -s -r -l FILE1 FILE2 Dir1  
+
+#Testing Recursive and Subdirectories with -u 
+read -p "${reset}Press [Enter] key to test upercasing with -r -s, testing command : ./chname.sh -s -r -u file1 file2 dir1"
+echo "${green}"
+./chname.sh -s -r -u file1 file2 dir1
+
+#Testing Subdirectories only with -l 
+read -p "${reset}Press [Enter] key to test lower casing with -s, testing command : ./chname.sh -l -s FILE1 FILE2 DIR1"
+echo "${green}"
+./chname.sh -l -s FILE1 FILE2 DIR1
+
+#Testing Subdirectories only with -u 
+read -p "${reset}Press [Enter] key to resume uper casing with s, testing comand : ./chname.sh -s -u file1 file2 dir1"
+echo "${green}"
+./chname.sh -s -u file1 file2 dir1    
+
+#Testing with * to change all files with same name
+read -p "${reset}Press [Enter] key to continue test"
+echo "${reset}"
+echo -e "\nTesting the * case to make upper case file which start 'w' "
+touch warsaw wroclaw wien
+read -p "${reset}The new testing files are created,Press [Enter] key to test, testing command : ./chname.sh -u w* "
+echo "${green}"
+./chname.sh -u w* 
+read -p "${reset}Deleting temporary testing files created for this test, Press [Enter] key to delete temporary files"
+rm W*
+
+##################  Possible Errors  ######################
+
+#If No Directional Positional Arguments are given
+echo -e "\n"
+read -p "${reset}Testing the Error Section Now....
+Press [Enter] key to resume ..."
+echo -e "${yell}If no directional argument (-l, -u, -r, -s) is selcted, testing command : ./chname.sh FILE1 FILE2"
+echo "${red}"
+./chname.sh FILE1 FILE2
+
+#If Two of the comparative arguments are seclected (-u and -l)
+read -p "${yell}If -l and -u are given together...
+${reset}press [Enter] key to resume, testing command : ./chname.sh -l -u FILE1 FILE2"
+echo "${red}"
+./chname.sh -l -u FILE1 FILE2
+
+#Help section
+read -p "${yell}Testing the Help Section....
+${reset}Press [Enter] key to see the Help Section, testing command : ./chname.sh -h"
+echo "${yell}"
+./chname.sh -h
+
+#Delection of created files
+echo -e "\n\n${green}All scenarios are tested properly."
+read -p "${reset}Press [Enter] key to delete the files and subdirectories"
+
+#Deleting the directories and files
+rm -r "${path}/DIR1"
+rm FILE1 FILE2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
